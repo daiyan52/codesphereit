@@ -21,6 +21,29 @@ app_license = "mit"
 # 	}
 # ]
 
+
+
+
+fixtures = [
+    "Client Script",
+    "Print Format"
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Includes in <head>
 # ------------------
 

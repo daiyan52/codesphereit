@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:health_assessment_center",
+ "creation": "2025-07-22 22:30:22.822994",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "health_assessment_center"
+ ],
+ "fields": [
+  {
+   "fieldname": "health_assessment_center",
+   "fieldtype": "Data",
+   "label": "Health Assessment Center",
+   "unique": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-22 22:34:59.129112",
+ "modified_by": "Administrator",
+ "module": "codesphereit",
+ "name": "Health Assessment Center",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "health_assessment_center",
+ "translated_doctype": 1
+}

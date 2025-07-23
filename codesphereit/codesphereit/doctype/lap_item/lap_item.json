@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-22 22:49:43.009736",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sample_type",
+  "range",
+  "result_status",
+  "column_break_sqwk",
+  "reference_ranges",
+  "unit",
+  "rate"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "sample_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sample Type",
+   "options": "Test Name",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "range",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Result",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fetch_from": "sample_type.unit",
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Unit"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "sample_type.reference_ranges",
+   "fieldname": "reference_ranges",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference Ranges"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "sample_type.rate",
+   "fieldname": "rate",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Rate"
+  },
+  {
+   "fieldname": "column_break_sqwk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "result_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Result Status"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-22 23:46:41.973300",
+ "modified_by": "Administrator",
+ "module": "codesphereit",
+ "name": "Lap Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
