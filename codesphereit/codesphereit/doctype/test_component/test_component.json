@@ -1,52 +1,53 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:health_assessment_center",
- "creation": "2025-07-22 22:30:22.822994",
+ "autoname": "field:test_component",
+ "creation": "2025-07-26 23:25:38.511205",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "health_assessment_center",
-  "column_break_meja",
-  "medical_laboratory_technician",
-  "column_break_iqsh",
-  "pathologist"
+  "test_component",
+  "column_break_efxc",
+  "normal_range",
+  "column_break_ievy",
+  "unit"
  ],
  "fields": [
   {
-   "fieldname": "health_assessment_center",
+   "fieldname": "test_component",
    "fieldtype": "Data",
-   "label": "Health Assessment Center",
+   "in_list_view": 1,
+   "label": "Test Component",
    "unique": 1
   },
   {
-   "fieldname": "medical_laboratory_technician",
-   "fieldtype": "Signature",
-   "label": "Medical Laboratory Technician",
-   "max_height": "10px",
-   "width": "20px"
+   "fieldname": "normal_range",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Normal Range"
   },
   {
-   "fieldname": "pathologist",
-   "fieldtype": "Signature",
-   "label": "Pathologist"
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Unit"
   },
   {
-   "fieldname": "column_break_meja",
+   "fieldname": "column_break_efxc",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_iqsh",
+   "fieldname": "column_break_ievy",
    "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-23 23:59:23.244110",
+ "modified": "2025-07-26 23:36:40.262120",
  "modified_by": "Administrator",
  "module": "codesphereit",
- "name": "Health Assessment Center",
+ "name": "Test Component",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
@@ -68,6 +69,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "health_assessment_center",
+ "title_field": "test_component",
  "translated_doctype": 1
 }

@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:LAB-R-{DD}-{MM}-{YYYY}-{####}",
+ "creation": "2025-07-22 22:57:27.525833",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "health_assessment_center",
+  "patient",
+  "contact_number",
+  "column_break_fboy",
+  "age",
+  "gender",
+  "date",
+  "section_break_xhlw",
+  "sample_type",
+  "section_break_jwdv",
+  "total_amount",
+  "section_break_jrez",
+  "medical_laboratory_technician"
+ ],
+ "fields": [
+  {
+   "fieldname": "patient",
+   "fieldtype": "Data",
+   "label": "Patient"
+  },
+  {
+   "fieldname": "health_assessment_center",
+   "fieldtype": "Link",
+   "label": "Health Assessment Center",
+   "options": "Health Assessment Center"
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "label": "Contact Number"
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "label": "Age"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "\nMale\nFemale\nOther"
+  },
+  {
+   "default": "Now",
+   "fieldname": "date",
+   "fieldtype": "Datetime",
+   "label": "Date"
+  },
+  {
+   "fieldname": "column_break_fboy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xhlw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sample_type",
+   "fieldtype": "Table",
+   "label": "Sample Type",
+   "options": "Lap Item"
+  },
+  {
+   "fieldname": "section_break_jwdv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_jrez",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "health_assessment_center.medical_laboratory_technician",
+   "fieldname": "medical_laboratory_technician",
+   "fieldtype": "Signature",
+   "label": "Medical Laboratory Technician"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Laboratory Report",
+   "link_fieldname": "billing"
+  }
+ ],
+ "modified": "2025-07-28 23:13:21.975348",
+ "modified_by": "Administrator",
+ "module": "codesphereit",
+ "name": "Billing",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

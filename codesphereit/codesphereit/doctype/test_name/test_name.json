@@ -6,11 +6,12 @@
  "engine": "InnoDB",
  "field_order": [
   "health_assessment_center",
+  "column_break_rivf",
   "health_assessment_name",
   "column_break_dpiv",
-  "unit",
-  "reference_ranges",
-  "rate"
+  "rate",
+  "section_break_tgwk",
+  "test_component"
  ],
  "fields": [
   {
@@ -20,16 +21,6 @@
    "label": "Health Assessment Center",
    "options": "Health Assessment Center",
    "reqd": 1
-  },
-  {
-   "fieldname": "unit",
-   "fieldtype": "Data",
-   "label": "Unit"
-  },
-  {
-   "fieldname": "reference_ranges",
-   "fieldtype": "Data",
-   "label": "Reference Ranges"
   },
   {
    "fieldname": "rate",
@@ -47,12 +38,26 @@
    "in_list_view": 1,
    "label": "Health Assessment Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rivf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_tgwk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "test_component",
+   "fieldtype": "Table",
+   "label": "Test Component",
+   "options": "Test Component Item"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 22:46:56.198395",
+ "modified": "2025-07-26 23:34:52.600305",
  "modified_by": "Administrator",
  "module": "codesphereit",
  "name": "Test Name",
@@ -76,6 +81,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "health_assessment_name",
- "translated_doctype": 1
+ "title_field": "health_assessment_name"
 }

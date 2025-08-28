@@ -29,10 +29,11 @@ fixtures = [
     "Print Format"
 ]
 
-
-
-
-
+doc_events = {
+    "Delivery Note": {
+        "before_insert": "codesphereit.api.delivery_note.set_custom_name"
+    }
+}
 
 
 

@@ -4,10 +4,21 @@
   "doctype": "Client Script",
   "dt": "Laboratory Report",
   "enabled": 1,
-  "modified": "2025-07-22 23:25:01.282343",
+  "modified": "2025-07-28 22:41:06.179003",
   "module": "codesphereit",
-  "name": "Laboratory Report",
-  "script": "frappe.ui.form.on('Lap Item', {\n    rate: update_total_amount,\n    range: update_total_amount,\n    sample_type_remove: update_total_amount,\n});\n\nfunction update_total_amount(frm) {\n    let total = 0;\n    (frm.doc.sample_type || []).forEach(row => {\n        total += (parseFloat(row.rate) || 0); // Or use row.rate * row.range\n    });\n    frm.set_value('total_amount', total);\n}\n\n\n",
+  "name": "Laboratory Report 1",
+  "script": "frappe.ui.form.on('Laboratory Report Item', {\n  result: function (frm, cdt, cdn) {\n    const row = locals[cdt][cdn];\n\n    console.log(\"Row Data:\", row); // 🔍 Debug log\n\n    if (!row.reference_range || !row.result) {\n      frappe.model.set_value(cdt, cdn, 'status', '');\n      return;\n    }\n\n    // Normalize dashes and split\n    const cleanRange = row.reference_range.replace(/[–—−]/g, '-');\n    const [minStr, maxStr] = cleanRange.split('-').map(val => val.trim());\n\n    const min = parseFloat(minStr);\n    const max = parseFloat(maxStr);\n    const result = parseFloat(row.result);\n\n    console.log(\"Parsed:\", { min, max, result });\n\n    if (!isNaN(min) && !isNaN(max) && !isNaN(result)) {\n      const status = result >= min && result <= max ? \"Normal\" : \"Abnormal\";\n      frappe.model.set_value(cdt, cdn, \"status\", status);\n    } else {\n      frappe.model.set_value(cdt, cdn, \"status\", '');\n    }\n  }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Billing",
+  "enabled": 1,
+  "modified": "2025-07-28 11:39:01.315020",
+  "module": "codesphereit",
+  "name": "Billing",
+  "script": "frappe.ui.form.on('Billing', {\n    refresh: function(frm) {\n \n             frm.add_custom_button('Create Laboratory Report', function() {\n                frappe.call({\n                    method: \"frappe.client.insert\",\n                    args: {\n                        doc: {\n                            doctype: \"Laboratory Report\",\n                            billing: frm.doc.name,\n                            health_assessment_center:frm.doc.health_assessment_center,\n                            patient_name: frm.doc.patient,\n                            age:frm.doc.age,\n                            contact_number:frm.doc.contact_number,\n                            gender:frm.doc.gender,\n                            sample: frm.doc.sample_type.map(sample_item => ({\n                                sample_type: sample_item.sample_name,\n                                doctype: \"Laboratory Report Item\"\n                            }))\n                        }\n                    },\n                    callback: function(response) {\n                        if (response.message) {\n                            frappe.set_route(\"Form\", \"Laboratory Report\", response.message.name);\n                        }\n                    }\n                });\n            });\n        \n    }\n});\n\n\n",
   "view": "Form"
  },
  {
@@ -15,10 +26,21 @@
   "doctype": "Client Script",
   "dt": "Laboratory Report",
   "enabled": 1,
-  "modified": "2025-07-22 23:55:37.311712",
+  "modified": "2025-07-28 23:10:47.328731",
   "module": "codesphereit",
-  "name": "Laboratory Report 1",
-  "script": "\n// frappe.ui.form.on('Lap Item', {\n//     range(frm, cdt, cdn) {\n//         const row = locals[cdt][cdn];\n\n//         const range = parseFloat(row.range);\n//         const [min, max] = (row.reference_ranges || '').split('-').map(Number);\n\n//         if (!isNaN(min) && !isNaN(max) && !isNaN(range)) {\n//             const status = (range >= min && range <= max) ? 'Normal' : 'Abnormal';\n//             frappe.model.set_value(cdt, cdn, 'result_status', status);\n//         } else {\n//             frappe.model.set_value(cdt, cdn, 'result_status', '');\n//         }\n//     }\n// });\n\n\nfrappe.ui.form.on('Lap Item', {\n    range(frm, cdt, cdn) {\n        const row = locals[cdt][cdn];\n\n        const range = parseFloat(row.range);\n        const [min, max] = (row.reference_ranges || '').split('-').map(Number);\n\n        let status = '';\n        let color = 'black';\n\n        if (!isNaN(min) && !isNaN(max) && !isNaN(range)) {\n            if (range >= min && range <= max) {\n                status = 'Normal';\n                color = 'green';\n            } else {\n                status = 'Abnormal';\n                color = 'red';\n            }\n        }\n\n        frappe.model.set_value(cdt, cdn, 'result_status', status);\n\n        // Use your preferred logic to color the input\n        setTimeout(() => {\n            const grid_row = frm.fields_dict.sample_type.grid.get_row(cdn);\n            if (grid_row && grid_row.fields_dict.range) {\n                grid_row.fields_dict.range.$wrapper\n                    .find('.form-control')\n                    .css('color', color);\n            }\n        }, 100);\n    }\n});\n",
+  "name": "Laboratory Report Test",
+  "script": "frappe.ui.form.on('Laboratory Report', {\n    refresh: function(frm) {\n        frm.add_custom_button(__('Fetch Components'), function() {\n            fetch_and_fill_components(frm);\n        });\n    }\n});\n\nasync function fetch_and_fill_components(frm) {\n    try {\n        frappe.show_alert(__('Fetching lab data...'), 5);\n        frm.dashboard.show_progress('Fetching data', 100, 'blue', true);\n\n        const response = await frappe.call({\n            method: 'codesphereit.api.lab_report.get_test_name_data'\n        });\n\n        const lab_data = response.message;\n        if (!lab_data || lab_data.length === 0) {\n            frappe.throw(__('No test data returned from server.'));\n            return;\n        }\n\n        // Create a lookup of test components by health_assessment_name\n        const test_map = {};\n        lab_data.forEach(test => {\n            if (test.health_assessment_name) {\n                test_map[test.health_assessment_name.trim()] = test.test_components || [];\n            }\n        });\n\n        const original_rows = frm.doc.sample.slice(); // clone to preserve order\n        const reordered_rows = [];\n\n        original_rows.forEach(group_row => {\n            const sample_type = group_row.sample_type?.trim();\n            group_row.is_group = 1; // Mark as group row\n            reordered_rows.push(group_row);\n\n            if (!sample_type || !test_map[sample_type]) return;\n\n            const components = test_map[sample_type];\n\n            components.forEach(comp => {\n                const new_row = frappe.model.get_new_doc('Laboratory Report Item', frm.doc, 'sample');\n                new_row.sample_type = '';\n                new_row.component = comp.test_component_name;\n                new_row.reference_range = comp.normal_range;\n                new_row.unit = comp.unit;\n                new_row.is_group = 0; // Mark component rows as not group\n\n                reordered_rows.push(new_row);\n            });\n        });\n\n        // Set the sample child table with reordered rows\n        frm.doc.sample = reordered_rows;\n\n        // Manually reset idx to preserve order\n        frm.doc.sample.forEach((row, index) => {\n            row.idx = index + 1;\n        });\n\n        frm.refresh_field('sample');\n        frappe.show_alert(__('Components added successfully'), 5);\n\n    } catch (error) {\n        console.error('Error:', error);\n        frappe.msgprint({\n            title: __('Error'),\n            message: __('Failed to update components: {0}', [error.message]),\n            indicator: 'red'\n        });\n    } finally {\n        frm.dashboard.hide_progress();\n    }\n}\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Billing",
+  "enabled": 1,
+  "modified": "2025-07-28 22:13:23.899139",
+  "module": "codesphereit",
+  "name": "Billing1",
+  "script": "\nfrappe.ui.form.on('Lap Item', {\n    rate: update_total_amount,\n    range: update_total_amount,\n    sample_type_remove: update_total_amount,\n});\n\nfunction update_total_amount(frm) {\n    let total = 0;\n    (frm.doc.sample_type || []).forEach(row => {\n        total += (parseFloat(row.rate) || 0); // Or use row.rate * row.range\n    });\n    frm.set_value('total_amount', total);\n}\n\n\n",
   "view": "Form"
  }
 ]

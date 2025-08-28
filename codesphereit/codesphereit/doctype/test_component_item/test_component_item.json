@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-26 23:18:39.521694",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "test_component_name",
+  "column_break_eohv",
+  "normal_range",
+  "column_break_qilq",
+  "unit"
+ ],
+ "fields": [
+  {
+   "fetch_from": "test_component_name.normal_range",
+   "fieldname": "normal_range",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Normal Range"
+  },
+  {
+   "fetch_from": "test_component_name.unit",
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Unit"
+  },
+  {
+   "fieldname": "test_component_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Test Component Name",
+   "options": "Test Component"
+  },
+  {
+   "fieldname": "column_break_eohv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qilq",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-26 23:38:09.456191",
+ "modified_by": "Administrator",
+ "module": "codesphereit",
+ "name": "Test Component Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
